@@ -22,11 +22,26 @@ class CustomSnackbar(private val view: View) {
                 android.R.color.transparent
             )
         )
-        binding.iconImgV.setImageResource(when(title){
-           ConnectivityObserver.Status.Available.name -> { R.drawable.network_availale }
-           ConnectivityObserver.Status.Unavailable.name -> { R.drawable.network_unavailable }
-            else ->{ R.drawable.network_unavailable }
-        })
+
+        when (title) {
+            ConnectivityObserver.Status.Available.name -> {
+                binding.root.setCardBackgroundColor(view.context.getColor(R.color.lightGreen))
+                binding.iconImgV.setImageResource(R.drawable.network_availale)
+                title.logD("TAG")
+            }
+            ConnectivityObserver.Status.Unavailable.name -> {
+                binding.root.setCardBackgroundColor(view.context.getColor(R.color.lightRed))
+                binding.iconImgV.setImageResource(R.drawable.network_unavailable)
+                title.logD("TAG")
+            }
+            ConnectivityObserver.Status.Losing.name -> {
+                title.logD("TAG")
+            }
+            ConnectivityObserver.Status.Lost.name -> {
+                title.logD("TAG")
+            }
+        }
+
         binding.titleTextV.text = title
         binding.root.setOnClickListener {
             cancelFun()

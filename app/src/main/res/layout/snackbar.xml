@@ -6,7 +6,8 @@
     app:cardCornerRadius="@dimen/_10sdp"
     app:cardElevation="@dimen/_3sdp"
     android:elevation="@dimen/_3sdp"
-    android:translationZ="@dimen/_3sdp">
+    android:translationZ="@dimen/_3sdp"
+    app:cardBackgroundColor="@color/lightRed">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
             android:layout_width="@dimen/_22sdp"
             android:layout_height="@dimen/_22sdp"
             android:layout_weight=".5"
-            android:src="@drawable/network_availale"
+            android:src="@drawable/network_unavailable"
             />
 
         <TextView
