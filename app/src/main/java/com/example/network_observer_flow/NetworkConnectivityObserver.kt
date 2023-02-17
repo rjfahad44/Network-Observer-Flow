@@ -1,5 +1,6 @@
 package com.example.network_observer_flow
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
@@ -17,6 +18,7 @@ class NetworkConnectivityObserver(
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
+    @SuppressLint("NewApi")
     override fun observe(): Flow<ConnectivityObserver.Status> {
         return callbackFlow {
             val callback = object : ConnectivityManager.NetworkCallback() {

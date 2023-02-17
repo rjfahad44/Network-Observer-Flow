@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,13 +21,11 @@ class NetworkObserverViewModel @Inject constructor(@ApplicationContext context: 
         networkConnectivityObserver = NetworkConnectivityObserver(context)
     }
 
-    fun networkObserve(): LiveData<ConnectivityObserver.Status> {
-        val res  = MutableLiveData(ConnectivityObserver.Status.Unavailable)
-        viewModelScope.launch {
-           networkConnectivityObserver.observe().collect{
-                res.postValue(it)
+    fun networkObserve(): Flow<ConnectivityObserver.Status> {
+        return flow {
+            networkConnectivityObserver.observe().collect{
+                emit(it)
             }
         }
-        return res
     }
 }
